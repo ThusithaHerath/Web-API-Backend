@@ -5,4 +5,8 @@ exports.routesConfig = function (app) {
     app.post('/package/add', [
         PackageController.newPackage
     ]);
+
+    app.get('/package/filter/',[
+        PackageController.filter
+    ]);
 }

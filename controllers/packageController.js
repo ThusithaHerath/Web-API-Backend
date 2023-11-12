@@ -30,3 +30,22 @@ exports.newPackage = async (req, res) => {
     })
 };
 
+exports.filter = async (req, res) =>{
+    try{
+        const packages = await Package.find(req.query)
+
+        res.status(200).json({
+            status: "SUCCESS",
+            length: packages.length,
+            data:{
+                packages
+            }
+        })
+    }catch(err) {
+        res.status(500).json({
+            status: "FAILED",
+            message: err.message
+        })
+    }
+};
+

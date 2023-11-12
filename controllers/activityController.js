@@ -18,7 +18,7 @@ exports.newActivity = async (req, res) => {
     newActivity.save().then(result => {
         res.status(200).json({
             status: "SUCCESS",
-            message: "New activity  added successfully",
+            message: "New activity added successfully",
             data: result,
         })
     }).catch(err => {
@@ -27,5 +27,24 @@ exports.newActivity = async (req, res) => {
             message: "An error occured while saving activity !"
         })
     })
+};
+
+exports.filter = async (req, res) =>{
+    try{
+        const activities = await Activity.find(req.query)
+
+        res.status(200).json({
+            status: "SUCCESS",
+            length: activities.length,
+            data:{
+                activities
+            }
+        })
+    }catch(err) {
+        res.status(500).json({
+            status: "FAILED",
+            message: err.message
+        })
+    }
 };
 

@@ -6,7 +6,7 @@ exports.routesConfig = function (app) {
         CruiseController.newCruise
     ]);
 
-    app.get('/cruise/filter/:option',[
+    app.get('/cruise/filter/',[
         CruiseController.filter
     ]);
 };

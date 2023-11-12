@@ -5,4 +5,8 @@ exports.routesConfig = function (app) {
     app.post('/activity/add', [
         ActivityController.newActivity
     ]);
+
+    app.get('/activity/filter/',[
+        ActivityController.filter
+    ]);
 };

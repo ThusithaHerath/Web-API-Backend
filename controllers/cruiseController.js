@@ -35,8 +35,22 @@ exports.newCruise = async (req, res) => {
 };
 
 exports.filter = async (req, res) =>{
-    const option = req.params.option;
-    res.json({option})  
+    try{
+        const cruises = await Cruise.find(req.query)
+
+        res.status(200).json({
+            status: "SUCCESS",
+            length: cruises.length,
+            data:{
+                cruises
+            }
+        })
+    }catch(err) {
+        res.status(500).json({
+            status: "FAILED",
+            message: err.message
+        })
+    }
 };
 
 
