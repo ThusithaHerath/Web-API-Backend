@@ -80,7 +80,6 @@ exports.deleteUser = (req, res) => {
 
 exports.saveDocument = (req, res, next) => {
     if (!req.is('multipart/form-data')) {
-
         return res.status(400).send({status: false, data: "Request body should be multipart form data"});
     }
     const document = new db.document({

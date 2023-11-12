@@ -2,6 +2,10 @@ const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
 const AuthRouter = require("./routes/user.routes");
+const CruiseRouter = require("./routes/cruise.routes");
+const PackageRouter = require("./routes/package.routes");
+const ActivityRouter = require("./routes/activity.routes");
+
 dotenv.config()
 
 app.use(express.urlencoded({extended: true}));
@@ -22,5 +26,11 @@ app.use((req, res, next) => {
 });
 
 AuthRouter.routesConfig(app);
+CruiseRouter.routesConfig(app);
+ActivityRouter.routesConfig(app);
+PackageRouter.routesConfig(app);
+
+
+
 
 app.listen(process.env.PORT, () => console.log(`App is listening port ${process.env.PORT}`))

@@ -18,6 +18,7 @@ exports.routesConfig = function (app) {
         AuthMiddleware.validJWTNeeded,
         UserController.getUsers
     ]);
+
     app.put('/user/:id', [
         AuthMiddleware.validJWTNeeded,
         UserController.putUser
@@ -32,6 +33,7 @@ exports.routesConfig = function (app) {
         AuthMiddleware.validJWTNeeded,
         UserController.getDocuments,
     ]);
+    
     app.post('/document', [
         AuthMiddleware.validJWTNeeded,
         UserController.saveDocument,
