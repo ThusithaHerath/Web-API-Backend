@@ -2,9 +2,9 @@ const db = require("../config/mongo.init");
 const Package = require("../models/package");
 
 exports.newPackage = async (req, res) => {
-    let { destination, duration, numberOfTravelers, speciality, packageRating, price } = req.body;
+    let { destination, duration, numberOfTravelers, speciality, packageRating, price, title, description } = req.body;
 
-    if (!destination || !duration || !numberOfTravelers || !speciality || !packageRating || !price) {
+    if (!destination || !duration || !numberOfTravelers || !speciality || !packageRating || !price || !title || !description) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -14,7 +14,9 @@ exports.newPackage = async (req, res) => {
         numberOfTravelers,
         speciality,
         packageRating,
-        price
+        price,
+        title,
+        description
     });
     newPackage.save().then(result => {
         res.status(200).json({

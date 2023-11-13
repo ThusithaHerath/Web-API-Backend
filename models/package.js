@@ -10,7 +10,9 @@ const packageSchema = new Schema({
         enum: ['Honeymoon','Beach holody', 'Wildlife excursion', 'Family holiday']
     },
     packageRating: Number,
-    price: Number
+    price: Number,
+    title: String,
+    description: String
 })
 const PackageSchema = mongoose.model('Package', packageSchema)
 module.exports = PackageSchema

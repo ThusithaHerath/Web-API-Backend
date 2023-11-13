@@ -12,7 +12,9 @@ const cruiseSchema = new Schema({
     provider: String,
     mealPreferences: String,
     cabinSelection: String,
-    image: String
+    image: String,
+    title: String,
+    description: String
 })
 
 const CruiseSchema = mongoose.model('Cruise', cruiseSchema)

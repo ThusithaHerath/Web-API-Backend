@@ -2,6 +2,8 @@ const db = require("../config/mongo.init");
 const Provider = require("../models/provider");
 const ArrivalDestination = require("../models/arrivalDestination");
 const DepatureDestination = require("../models/departureDestinations");
+const Destination = require("../models/destination");
+
 
 
 //arrival functions
@@ -120,3 +122,40 @@ exports.getProviders = (req, res) => {
     })
 };
 
+//destination functions
+
+exports.newDestination = async (req, res) => {
+    let { destination} = req.body;
+
+    const newDestination= new Destination({
+        destination
+    });
+    newDestination.save().then(result => {
+        res.status(200).json({
+            status: "SUCCESS",
+            message: "New destination added successfully",
+            data: result,
+        })
+    }).catch(err => {
+        res.status(500).json({
+            status: "FAILED",
+            message: "An error occured while saving destination!"
+        })
+    })
+};
+
+exports.getDestinations = (req, res) => {
+    Destination.find().then((destinations) => {
+        res.status(200).send({
+            status: "SUCCESS",
+            message: "Retrieved destinations successfully",
+            data: destinations
+        })
+    }).catch((err) => {
+        console.log(err)
+        res.status(500).send({     
+        status: "FAILED",
+        message: "An error occurred while retrieving destinations.",
+        error: err })
+    })
+};

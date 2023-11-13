@@ -2,9 +2,9 @@ const db = require("../config/mongo.init");
 const Activity = require("../models/activity");
 
 exports.newActivity = async (req, res) => {
-    let { destination, date, typeOfActivity, price, starRating } = req.body;
+    let { destination, date, typeOfActivity, price, starRating, title, description } = req.body;
 
-    if (!destination || !date || !typeOfActivity || !price ) {
+    if (!destination || !date || !typeOfActivity || !price  || !title || !description) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -13,7 +13,9 @@ exports.newActivity = async (req, res) => {
         date,
         typeOfActivity,
         price,
-        starRating
+        starRating,
+        title,
+        description
     });
     newActivity.save().then(result => {
         res.status(200).json({

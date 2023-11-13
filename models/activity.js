@@ -9,7 +9,9 @@ const activitySchema = new Schema({
         enum: ['Adventure','Sight Seeing', 'Theme Park', 'Tour']
     },
     starRating: Number,
-    price: Number
+    price: Number,
+    title: String,
+    description: String
 })
 const ActivitySchema = mongoose.model('Activity', activitySchema)
 module.exports = ActivitySchema

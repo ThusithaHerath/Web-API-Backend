@@ -35,4 +35,14 @@ exports.routesConfig = function (app) {
         ListController.getProviders
     ]);
 
+    //destinations routes
+    app.post('/destination/add', [
+        AuthMiddleware.validJWTNeeded,
+        ListController.newDestination
+    ]);
+
+    app.get('/destination', [
+        AuthMiddleware.validJWTNeeded,
+        ListController.getDestinations
+    ]);
 };

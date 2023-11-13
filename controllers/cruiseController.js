@@ -7,14 +7,14 @@ const fs = require("fs");
 //image location
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, "storage");
+      cb(null, "storage/cruise");
     },
     filename: function (req, file, cb) {
       let ext = path.extname(file.originalname);
       cb(null, Date.now() + ext);
     },
   });
-  
+
 var upload = multer({
     storage: storage,
 }).single("image");
@@ -33,9 +33,9 @@ exports.newCruise = async (req, res) => {
           });
         }
 
-        let { departureDestination, arrivalDestination, departureDate, deck, cabinClass, price, duration, provider, mealPreferences, cabinSelection, image } = req.body;
+        let { departureDestination, arrivalDestination, departureDate, deck, cabinClass, price, duration, provider, mealPreferences, cabinSelection, image, title, description } = req.body;
 
-        if (!departureDestination || !arrivalDestination || !departureDate || !deck || !cabinClass) {
+        if (!departureDestination || !arrivalDestination || !departureDate || !deck || !cabinClass || !title || !description) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -46,6 +46,8 @@ exports.newCruise = async (req, res) => {
             deck,
             cabinClass,
             image: req.file.filename,
+            title,
+            description
         });
         newCruise.save().then(result => {
             res.status(200).json({
