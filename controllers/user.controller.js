@@ -53,9 +53,13 @@ exports.getUsers = (req, res) => {
 }
 
 exports.putUser = (req, res) => {
+    let salt = crypto.randomBytes(16).toString('base64');
+    let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
+    req.body.password = salt + "$" + hash;
+
     db.user.findOneAndUpdate({_id: req.params.id}, {
         $set: {
-            fullName: req.body.fullName, email: req.body.email,
+            fullName: req.body.fullName, email: req.body.email, password: req.body.password
         }
     }, {new: true}).then(r => {
         if (r != null) {

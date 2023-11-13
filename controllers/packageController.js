@@ -33,7 +33,6 @@ exports.newPackage = async (req, res) => {
 exports.filter = async (req, res) =>{
     try{
         const packages = await Package.find(req.query)
-
         res.status(200).json({
             status: "SUCCESS",
             length: packages.length,

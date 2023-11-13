@@ -5,6 +5,7 @@ const AuthRouter = require("./routes/user.routes");
 const CruiseRouter = require("./routes/cruise.routes");
 const PackageRouter = require("./routes/package.routes");
 const ActivityRouter = require("./routes/activity.routes");
+const ListRouter = require("./routes/list.routes");
 
 dotenv.config()
 
@@ -29,6 +30,7 @@ AuthRouter.routesConfig(app);
 CruiseRouter.routesConfig(app);
 ActivityRouter.routesConfig(app);
 PackageRouter.routesConfig(app);
+ListRouter.routesConfig(app);
 
 
 
