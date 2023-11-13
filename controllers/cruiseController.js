@@ -1,35 +1,63 @@
 const db = require("../config/mongo.init");
 const Cruise = require("../models/cruise");
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+
+//image location
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "storage");
+    },
+    filename: function (req, file, cb) {
+      let ext = path.extname(file.originalname);
+      cb(null, Date.now() + ext);
+    },
+  });
+  
+var upload = multer({
+    storage: storage,
+}).single("image");
 
 exports.newCruise = async (req, res) => {
-    let { departureDestination, arrivalDestination, departureDate, deck, cabinClass, price, duration, provider, mealPreferences, cabinSelection } = req.body;
-
-    if (!departureDestination || !arrivalDestination || !departureDate || !deck || !cabinClass || !price || !duration || !provider || !mealPreferences || !cabinSelection) {
-        return res.status(400).json({ error: 'Missing required fields' });
-    }
-
-    const newCruise = new Cruise({
-        departureDestination,
-        arrivalDestination,
-        departureDate,
-        deck,
-        cabinClass,
-        price,
-        duration,
-        provider,
-        mealPreferences,
-        cabinSelection
-    });
-    newCruise.save().then(result => {
-        res.status(200).json({
-            status: "SUCCESS",
-            message: "New cruise  added successfully",
-            data: result,
-        })
-    }).catch(err => {
-        res.status(500).json({
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+          return res.status(500).json({
             status: "FAILED",
-            message: "An error occured while saving cruise !"
+            message: "An error occurred while uploading the image.",
+          });
+        } else if (err) {
+          return res.status(500).json({
+            status: "FAILED",
+            message: "An error occurred while uploading the image.",
+          });
+        }
+
+        let { departureDestination, arrivalDestination, departureDate, deck, cabinClass, price, duration, provider, mealPreferences, cabinSelection, image } = req.body;
+
+        if (!departureDestination || !arrivalDestination || !departureDate || !deck || !cabinClass) {
+            return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const newCruise = new Cruise({
+            departureDestination,
+            arrivalDestination,
+            departureDate,
+            deck,
+            cabinClass,
+            image: req.file.filename,
+        });
+        newCruise.save().then(result => {
+            res.status(200).json({
+                status: "SUCCESS",
+                message: "New cruise  added successfully",
+                data: result,
+            })
+        }).catch(err => {
+            res.status(500).json({
+                status: "FAILED",
+                message: "An error occured while saving cruise !"
+            })
         })
     })
 };
