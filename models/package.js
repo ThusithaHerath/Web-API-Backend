@@ -7,7 +7,7 @@ const packageSchema = new Schema({
     numberOfTravelers:Number,
     speciality: {
         type: String,
-        enum: ['Honeymoon','Beach holody', 'Wildlife excursion', 'Family holiday']
+        enum: ['Honeymoon','Beach holiday', 'Wildlife excursion', 'Family holiday']
     },
     packageRating: Number,
     price: Number,

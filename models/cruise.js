@@ -5,6 +5,7 @@ const cruiseSchema = new Schema({
     departureDestination: String,
     arrivalDestination: String,
     departureDate: Date,
+    arrivalDate: Date,
     deck: String,
     price: Number,
     duration: Number,

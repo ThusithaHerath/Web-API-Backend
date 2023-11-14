@@ -3,7 +3,7 @@ const Cart = require("../models/cart");
 const mongoose = require('mongoose');
 
 exports.addToCart = async (req, res) => {
-  const { travelAgentId, cruises, mealPreferences, cabinSelection, activities, packages } = req.body;
+  const { travelAgentId, cruises, mealPreferences, cabinSelection, activities, packages, numberOfParticipants, ageOfParticipants } = req.body;
 
   if (cruises) {
     try {
@@ -34,8 +34,8 @@ exports.addToCart = async (req, res) => {
           const newCart = new Cart({
             travelAgentId,
             activities,
-            mealPreferences,
-            cabinSelection,
+            numberOfParticipants,
+            ageOfParticipants
           });
           await newCart.save();
     

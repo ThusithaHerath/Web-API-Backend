@@ -20,7 +20,9 @@ const cartSchema = new Schema({
         ref: "package"
     },],
     mealPreferences: String,
-    cabinSelection: String
+    cabinSelection: String,
+    numberOfParticipants: Number,
+    ageOfParticipants: Number
 
 })
 
