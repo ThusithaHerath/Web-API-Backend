@@ -13,5 +13,5 @@ const activitySchema = new Schema({
     title: String,
     description: String
 })
-const ActivitySchema = mongoose.model('Activity', activitySchema)
+const ActivitySchema = mongoose.model('activity', activitySchema)
 module.exports = ActivitySchema

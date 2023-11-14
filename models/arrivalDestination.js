@@ -5,5 +5,5 @@ const arrivalSchema = new Schema({
     arrivalDestination: String,
 })
 
-const ArrivalSchema = mongoose.model('ArrivalDestination', arrivalSchema)
+const ArrivalSchema = mongoose.model('arrivalDestination', arrivalSchema)
 module.exports = ArrivalSchema

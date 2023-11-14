@@ -6,6 +6,7 @@ const CruiseRouter = require("./routes/cruise.routes");
 const PackageRouter = require("./routes/package.routes");
 const ActivityRouter = require("./routes/activity.routes");
 const ListRouter = require("./routes/list.routes");
+const CartRouter = require("./routes/cart.routes");
 
 dotenv.config()
 
@@ -31,8 +32,6 @@ CruiseRouter.routesConfig(app);
 ActivityRouter.routesConfig(app);
 PackageRouter.routesConfig(app);
 ListRouter.routesConfig(app);
-
-
-
+CartRouter.routesConfig(app);
 
 app.listen(process.env.PORT, () => console.log(`App is listening port ${process.env.PORT}`))

@@ -5,5 +5,5 @@ const destinationSchema = new Schema({
     destination: String,
 })
 
-const DestinationSchema = mongoose.model('Destinations', destinationSchema)
+const DestinationSchema = mongoose.model('destinations', destinationSchema)
 module.exports = DestinationSchema

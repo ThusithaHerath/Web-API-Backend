@@ -17,5 +17,5 @@ const cruiseSchema = new Schema({
     description: String
 })
 
-const CruiseSchema = mongoose.model('Cruise', cruiseSchema)
+const CruiseSchema = mongoose.model('cruise', cruiseSchema)
 module.exports = CruiseSchema

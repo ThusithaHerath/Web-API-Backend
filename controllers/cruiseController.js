@@ -35,7 +35,7 @@ exports.newCruise = async (req, res) => {
 
         let { departureDestination, arrivalDestination, departureDate, deck, cabinClass, price, duration, provider, mealPreferences, cabinSelection, image, title, description } = req.body;
 
-        if (!departureDestination || !arrivalDestination || !departureDate || !deck || !cabinClass || !title || !description) {
+        if (!departureDestination || !arrivalDestination || !departureDate || !deck || !title || !description) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -82,6 +82,7 @@ exports.filter = async (req, res) =>{
         })
     }
 };
+
 
 
   

@@ -14,5 +14,5 @@ const packageSchema = new Schema({
     title: String,
     description: String
 })
-const PackageSchema = mongoose.model('Package', packageSchema)
+const PackageSchema = mongoose.model('package', packageSchema)
 module.exports = PackageSchema

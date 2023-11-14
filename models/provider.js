@@ -5,5 +5,5 @@ const providerSchema = new Schema({
     provider: String,
 })
 
-const ProviderSchema = mongoose.model('Provider', providerSchema)
+const ProviderSchema = mongoose.model('provider', providerSchema)
 module.exports = ProviderSchema
