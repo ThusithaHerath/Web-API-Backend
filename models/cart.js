@@ -11,6 +11,14 @@ const cartSchema = new Schema({
         type: Array,
         ref: "cruise"
     },],
+    activities:[{
+        type: Array,
+        ref: "activity"
+    },],
+    packages:[{
+        type: Array,
+        ref: "package"
+    },],
     mealPreferences: String,
     cabinSelection: String
 

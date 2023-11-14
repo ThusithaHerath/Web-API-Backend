@@ -5,4 +5,7 @@ exports.routesConfig = function (app) {
     app.post('/cart/add', [
         CartController.addToCart
     ]);
+    app.post('/checkout', [
+        CartController.checkout
+    ]);
 };
