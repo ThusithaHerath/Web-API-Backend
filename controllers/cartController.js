@@ -15,6 +15,7 @@ exports.addToCart = async (req, res) => {
         cruises: [],
         activities: [],
         packages: [],
+        total: 0
       });
       await newCart.save();
     }
@@ -50,6 +51,10 @@ exports.addToCart = async (req, res) => {
       });
     }
 
+     // Calculate and update the total price
+     const totalPrice = calculateTotalPrice(cart);
+     cart.total = totalPrice;
+
     await cart.save();
 
     res.status(200).json({
@@ -63,6 +68,28 @@ exports.addToCart = async (req, res) => {
     });
   }
 };
+
+// Function to calculate total price
+function calculateTotalPrice(cart) {
+  let total = 0;
+
+  // Calculate total for cruises
+  total += cart.cruises.reduce((acc, cruise) => acc + cruise.price, 0);
+
+  // Calculate total for activities
+  total += cart.activities.reduce((acc, activity) => acc + activity.price, 0);
+
+  // Calculate total for packages
+  total += cart.packages.reduce((acc, package) => acc + package.price, 0);
+
+  return total;
+}
+
+
+
+
+
+
 
 
 exports.checkout = async (req, res) => {

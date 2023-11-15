@@ -23,6 +23,7 @@ const cartSchema = new Schema({
     title: String,
     price: Number
   }],
+  total: Number
 });
 
 const CartSchema = mongoose.model('cart', cartSchema);

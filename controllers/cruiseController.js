@@ -3,6 +3,8 @@ const Cruise = require("../models/cruise");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const AWS = require("aws-sdk");
+const s3 = new AWS.S3();
 
 //image location
 var storage = multer.diskStorage({
