@@ -1,6 +1,12 @@
 # Vacation4You backend project 
 
-Brief description of your project.
+Assessment Details
+
+My team has been tasked with providing a web-based solution for an upcoming Travel Company that caters to both local and foreign travel.
+
+Vacations4You is a Travel Company that provides Cruise bookings, Activities, and holiday packages to their clients. It is a new venture in Sri Lanka that has been initiated by a large Travel Company based in the USA. You have been provided with the following requirements.
+
+The web-based solution is used by Travel Agents, who represent Vacations4You. The Agents make reservations on behalf of their clients who either visit the Vacations4You outlets at Kandy City Center and Colombo City Center or via their Call Centre.  
 
 ## Table of Contents
 
