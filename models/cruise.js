@@ -4,8 +4,8 @@ const Schema = mongoose.Schema
 const cruiseSchema = new Schema({
     departureDestination: String,
     arrivalDestination: String,
-    departureDate: Date,
-    arrivalDate: Date,
+    departureDate: Number,
+    arrivalDate: Number,
     deck: String,
     price: Number,
     duration: Number,

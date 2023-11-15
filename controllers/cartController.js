@@ -83,5 +83,29 @@ exports.checkout = async (req, res) => {
       status: "SUCCESS",
       message: "Checkout successful",
     });
-  };
+};
+
+exports.getCart = async (req, res) => {
+  try {
+      const travelAgentId = req.params.id; 
+
+      const cartData = await Cart.findOne({ travelAgentId });
+
+      if (!cartData) {
+          return res.status(404).json({ error: 'Cart not found' });
+      }
+
+      return res.status(200).json(cartData);
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
+
+
+
+
+
   

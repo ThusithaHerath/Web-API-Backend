@@ -8,4 +8,7 @@ exports.routesConfig = function (app) {
     app.post('/checkout', [
         CartController.checkout
     ]);
+    app.get('/cart/:id', [
+        CartController.getCart
+    ]);
 };

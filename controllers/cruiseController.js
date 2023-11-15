@@ -19,6 +19,7 @@ var upload = multer({
     storage: storage,
 }).single("image");
 
+
 exports.newCruise = async (req, res) => {
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const packageSchema = new Schema({
     destination: String,
-    duration: Date,
+    duration: Number,
     numberOfTravelers:Number,
     speciality: {
         type: String,

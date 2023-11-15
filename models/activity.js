@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const activitySchema = new Schema({
     destination: String,
-    date: Date,
+    date: Number,
     typeOfActivity: {
         type: String,
         enum: ['Adventure','Sight Seeing', 'Theme Park', 'Tour']
