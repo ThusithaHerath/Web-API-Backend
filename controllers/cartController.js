@@ -3,76 +3,67 @@ const Cart = require("../models/cart");
 const mongoose = require('mongoose');
 
 exports.addToCart = async (req, res) => {
-  const { travelAgentId, cruises, mealPreferences, cabinSelection, activities, packages, numberOfParticipants, ageOfParticipants } = req.body;
+  const { travelAgentId, cruises, mealPreferences, cabinSelection, activities, packages, numberOfParticipants, ageOfParticipants, price, title } = req.body;
 
-  if (cruises) {
-    try {
-        const cart = await Cart.findOne({ travelAgentId }).exec();
-    
-          const newCart = new Cart({
-            travelAgentId,
-            cruises,
-            mealPreferences,
-            cabinSelection,
-          });
-          await newCart.save();
-    
-        res.status(200).json({
-          status: "SUCCESS",
-          message: "Cruise added to the cart successfully",
+  try {
+    const cart = await Cart.findOne({ travelAgentId }).exec();
+
+    if (!cart) {
+      // If cart doesn't exist, create a new one
+      const newCart = new Cart({
+        travelAgentId,
+        cruises: [],
+        activities: [],
+        packages: [],
+      });
+      await newCart.save();
+    }
+
+    if (cruises) {
+      const { mealPreferences, cabinSelection, price, title } = req.body;
+      cruises.forEach(async (cruise) => {
+        cart.cruises.push({
+          title: cruise.title,
+          mealPreferences: cruise.mealPreferences,
+          cabinSelection: cruise.cabinSelection,
+          price: cruise.price,
         });
-      } catch (err) {
-        res.status(500).json({
-          status: "FAILED",
-          message: err.message,
+      });
+    } else if (activities) {
+      const { numberOfParticipants, ageOfParticipants, price, title } = req.body;
+
+      activities.forEach(async (activity) => {
+        cart.activities.push({
+          title: activity.title,
+          numberOfParticipants: activity.numberOfParticipants,
+          ageOfParticipants: activity.ageOfParticipants,
+          price: activity.price,
         });
-      }
-  } if(activities){
-    try {
-        const cart = await Cart.findOne({ travelAgentId }).exec();
-    
-          const newCart = new Cart({
-            travelAgentId,
-            activities,
-            numberOfParticipants,
-            ageOfParticipants
-          });
-          await newCart.save();
-    
-        res.status(200).json({
-          status: "SUCCESS",
-          message: "Activities added to the cart successfully",
+      });
+    } else if (packages) {
+      const { price, title } = req.body;
+      packages.forEach(async (package) => {
+        cart.packages.push({
+          title: package.title,
+          price: package.price,
         });
-      } catch (err) {
-        res.status(500).json({
-          status: "FAILED",
-          message: err.message,
-        });
-      }
-  } if(packages){
-    try {
-        const cart = await Cart.findOne({ travelAgentId }).exec();
-    
-          const newCart = new Cart({
-            travelAgentId,
-            packages,
-            mealPreferences,
-            cabinSelection,
-          });
-          await newCart.save();
-    
-        res.status(200).json({
-          status: "SUCCESS",
-          message: "Packages added to the cart successfully",
-        });
-      } catch (err) {
-        res.status(500).json({
-          status: "FAILED",
-          message: err.message,
-        });
-      }
+      });
+    }
+
+    await cart.save();
+
+    res.status(200).json({
+      status: "SUCCESS",
+      message: "Items added to the cart successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "FAILED",
+      message: err.message,
+    });
   }
 };
+
 
 exports.checkout = async (req, res) => {
     const { travelAgentId, paymentInfo, billingInfo, contactInfo } = req.body;
