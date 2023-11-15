@@ -86,12 +86,6 @@ function calculateTotalPrice(cart) {
 }
 
 
-
-
-
-
-
-
 exports.checkout = async (req, res) => {
     const { travelAgentId, paymentInfo, billingInfo, contactInfo } = req.body;
   

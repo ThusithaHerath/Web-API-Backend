@@ -11,7 +11,8 @@ const activitySchema = new Schema({
     starRating: Number,
     price: Number,
     title: String,
-    description: String
+    description: String,
+    image: String
 })
 const ActivitySchema = mongoose.model('activity', activitySchema)
 module.exports = ActivitySchema
