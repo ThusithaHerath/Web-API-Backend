@@ -73,7 +73,6 @@ The application will be accessible at [http://localhost:3000](http://localhost:3
 
 ## Usage
 
-Provide instructions on how to use your application. Include any additional information that might be helpful for users.
 
 ## Contributing
 
