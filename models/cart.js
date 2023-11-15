@@ -7,18 +7,18 @@ const cartSchema = new Schema({
         ref: "user",
         required: true
     },
-    cruises:[{
+    cruises:{
         type: Array,
         ref: "cruise"
-    },],
-    activities:[{
+    },
+    activities:{
         type: Array,
         ref: "activity"
-    },],
-    packages:[{
+    },
+    packages:{
         type: Array,
         ref: "package"
-    },],
+    },
     mealPreferences: String,
     cabinSelection: String,
     numberOfParticipants: Number,
