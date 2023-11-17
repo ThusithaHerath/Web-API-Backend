@@ -3,7 +3,7 @@ const Cart = require("../models/cart");
 const mongoose = require('mongoose');
 
 exports.addToCart = async (req, res) => {
-  const { travelAgentId, cruises, mealPreferences, cabinSelection, activities, packages, numberOfParticipants, ageOfParticipants, price, title } = req.body;
+  const { travelAgentId, cruises, activities, packages } = req.body;
 
   try {
     const cart = await Cart.findOne({ travelAgentId }).exec();
@@ -87,25 +87,43 @@ function calculateTotalPrice(cart) {
 
 
 exports.checkout = async (req, res) => {
-    const { travelAgentId, paymentInfo, billingInfo, contactInfo } = req.body;
-  
-    await Cart.findOneAndDelete({ travelAgentId });
-  
+  const { travelAgentId } = req.body;
+
+  try {
+    const cart = await Cart.findOne({ travelAgentId }).exec();
+
+    if (!cart) {
+      return res.status(404).json({
+        status: "FAILED",
+        message: "Cart not found for the specified travelAgentId",
+      });
+    }
+    // Remove all items from the cart
+    cart.cruises = [];
+    cart.activities = [];
+    cart.packages = [];
+    cart.total = 0;
+
+    await cart.save();
+
     res.status(200).json({
       status: "SUCCESS",
       message: "Checkout successful",
     });
+  } catch (err) {
+    res.status(500).json({
+      status: "FAILED",
+      message: err.message,
+    });
+  }
 };
+
 
 exports.getCart = async (req, res) => {
   try {
       const travelAgentId = req.params.id; 
 
       const cartData = await Cart.findOne({ travelAgentId });
-
-      if (!cartData) {
-          return res.status(404).json({ error: 'Cart not found' });
-      }
 
       return res.status(200).json(cartData);
   } catch (error) {
