@@ -132,7 +132,60 @@ exports.getCart = async (req, res) => {
   }
 };
 
+exports.removeItem = async (req, res) => {
+  const itemId = req.params.itemId; 
+  const cartId = req.params.cartId;
 
+  try {
+    console.log(cartId);
+    
+    if (!mongoose.Types.ObjectId.isValid(cartId)) {
+      return res.status(400).json({ message: 'Invalid cartId' });
+    }
+
+    const cart = await Cart.findById(cartId);
+
+    if (!cart) {
+      return res.status(404).json({ message: 'Cart not found' });
+    }
+
+    let itemType;
+    if (cart.packages.some(item => item._id.toString() === itemId)) {
+      itemType = 'packages';
+    } else if (cart.activities.some(item => item._id.toString() === itemId)) {
+      itemType = 'activities';
+    } else if (cart.cruises.some(item => item._id.toString() === itemId)) {
+      itemType = 'cruises';
+    } else {
+      return res.status(404).json({ message: 'Item not found in cart' });
+    }
+
+    cart[itemType] = cart[itemType].filter(item => item._id.toString() !== itemId);
+
+    cart.total = calculateTotal(cart);
+
+    // Save the updated cart
+    await cart.save();
+
+    res.status(200).json({ message: 'Item removed successfully', cart });
+
+    res.json({ cart });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+const calculateTotal = (cart) => {
+  let total = 0;
+
+  // Sum up the prices in packages, activities, and cruises arrays
+  total += cart.packages.reduce((acc, item) => acc + item.price, 0);
+  total += cart.activities.reduce((acc, item) => acc + item.price, 0);
+  total += cart.cruises.reduce((acc, item) => acc + item.price, 0);
+
+  return total;
+};
 
 
 

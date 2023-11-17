@@ -14,7 +14,8 @@ const cruiseSchema = new Schema({
     cabinClass: Array,
     image: String,
     title: String,
-    description: String
+    description: String,
+    starRating: String
 })
 
 const CruiseSchema = mongoose.model('cruise', cruiseSchema)
