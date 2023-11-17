@@ -14,7 +14,7 @@ exports.routesConfig = function (app) {
         AuthMiddleware.validJWTNeeded,
         CartController.getCart
     ]);
-    app.get('/cart/remove/:cartId/:itemId', [
+    app.delete('/cart/remove/:cartId/:itemId', [
         AuthMiddleware.validJWTNeeded,
         CartController.removeItem
     ]);
