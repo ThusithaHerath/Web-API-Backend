@@ -32,9 +32,9 @@ exports.newActivity = async (req, res) => {
           });
         }
 
-    let { destination, date, typeOfActivity, price, starRating, title, description, image } = req.body;
+    let { destination, date, typeOfActivity, price, starRating, title, description, image, age } = req.body;
 
-    if (!destination || !date || !typeOfActivity || !price  || !title || !description) {
+    if (!destination || !date || !typeOfActivity || !price  || !title || !description || !age) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -47,6 +47,7 @@ exports.newActivity = async (req, res) => {
         title,
         description,
         image: req.file.filename,
+        age
     });
     newActivity.save().then(result => {
         res.status(200).json({

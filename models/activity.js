@@ -12,7 +12,8 @@ const activitySchema = new Schema({
     price: Number,
     title: String,
     description: String,
-    image: String
+    image: String,
+    age: String
 })
 const ActivitySchema = mongoose.model('activity', activitySchema)
 module.exports = ActivitySchema

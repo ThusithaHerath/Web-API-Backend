@@ -21,7 +21,6 @@ exports.addToCart = async (req, res) => {
     }
 
     if (cruises) {
-      const { mealPreferences, cabinSelection, price, title } = req.body;
       cruises.forEach(async (cruise) => {
         cart.cruises.push({
           title: cruise.title,
@@ -31,8 +30,6 @@ exports.addToCart = async (req, res) => {
         });
       });
     } else if (activities) {
-      const { numberOfParticipants, ageOfParticipants, price, title } = req.body;
-
       activities.forEach(async (activity) => {
         cart.activities.push({
           title: activity.title,
@@ -42,7 +39,6 @@ exports.addToCart = async (req, res) => {
         });
       });
     } else if (packages) {
-      const { price, title } = req.body;
       packages.forEach(async (package) => {
         cart.packages.push({
           title: package.title,

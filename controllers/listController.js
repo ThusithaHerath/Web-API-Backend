@@ -5,7 +5,6 @@ const DepatureDestination = require("../models/departureDestinations");
 const Destination = require("../models/destination");
 
 
-
 //arrival functions
 
 exports.newArrivalDestination = async (req, res) => {

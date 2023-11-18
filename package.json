@@ -12,16 +12,14 @@
     "url": "https://github.com/ThusithaHerath/Web-API-Backend"
   },
   "dependencies": {
-    "aws-sdk": "^2.1496.0",
+    "aws-sdk": "^2.1498.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.4",
     "mongoose": "^7.0.2",
     "multer": "^1.4.4",
-    "nodemailer": "^6.7.5",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "multer-s3": "^3.0.1",
+    "swagger-jsdoc": "^6.2.8"
   },
   "author": "Thusitha Herath",
   "license": "ISC"
