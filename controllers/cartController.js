@@ -36,6 +36,7 @@ exports.addToCart = async (req, res) => {
           numberOfParticipants: activity.numberOfParticipants,
           ageOfParticipants: activity.ageOfParticipants,
           price: activity.price,
+          
         });
       });
     } else if (packages) {

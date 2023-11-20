@@ -1,42 +1,17 @@
-const db = require("../config/mongo.init");
 const Cruise = require("../models/cruise");
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
-const AWS = require("aws-sdk");
-const s3 = new AWS.S3();
-const multerS3 = require('multer-s3');
-const { v4: uuidv4 } = require('uuid');
 
 
-// Configure AWS SDK
-AWS.config.update({
-    accessKeyId: process.env.AWS_S3_BUCKET_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_S3_BUCKET_SECRET_KEY,
-});
-
-// Define multer storage using S3
-var storage = multerS3({
-    s3: s3,
-    bucket:"swift-guard",
-    acl: 'public-read', // Set the appropriate ACL for your use case
-    key: function (req, file, cb) {
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "storage/cruise");
+    },
+    filename: function (req, file, cb) {
       let ext = path.extname(file.originalname);
-      cb(null, 'cruise/' + uuidv4() + ext); // Change 'cruise/' to your desired S3 folder path
+      cb(null, Date.now() + ext);
     },
   });
-
-
-//image location
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, "storage/cruise");
-//     },
-//     filename: function (req, file, cb) {
-//       let ext = path.extname(file.originalname);
-//       cb(null, Date.now() + ext);
-//     },
-//   });
 
 var upload = multer({
     storage: storage,
@@ -70,7 +45,7 @@ exports.newCruise = async (req, res) => {
             arrivalDate,
             deck,
             cabinClass,
-            image: req.file.location,
+            image: req.file.filename,
             title,
             description,
             mealPreferences,
